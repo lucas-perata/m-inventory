@@ -1,0 +1,71 @@
+# Compiled binary files
+bin/
+obj/
+out/
+
+# Visual Studio
+.vscode/
+*.user
+*.suo
+*.vcxproj.user
+*.csproj.user
+
+# Rider
+.idea/
+.idea_modules/
+
+# Backup & Logs
+*.log
+*.bak
+*.swp
+*.sln.docstates
+
+# Package directories
+packages/
+.vs/
+
+# Build results
+*.dll
+*.exe
+*.app
+*.log
+*.sql
+*.sqlite
+*.pdb
+*.mdb
+*.cache
+*.csproj.FileListAbsolute.txt
+
+# OS generated files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
+desktop.ini
+
+# JetBrains Rider
+.idea/
+
+# Visual Studio Code
+.vscode/
+
+# Mono Auto Generated Files
+mono_crash.*
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Azure Pipelines
+!/.azuredevops/
+
+# Resharper
+_ReSharper/
+*.ReSharper
+*.DotSettings.user
+
+# DotNetCore
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# ASP.NET 
