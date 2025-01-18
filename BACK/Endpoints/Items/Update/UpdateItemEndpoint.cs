@@ -3,15 +3,15 @@ using BACK.Data;
 using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
 
-namespace BACK.Endpoints.Items.GetById;
+namespace api.Endpoints.Items.Update;
 
-public class GetItemByIdEndpoint : Endpoint<RequestDto, ResponseDto>
+public class UpdateItemEndpoint : Endpoint<RequestDto, ResponseDto>
 {
     public DataContext _context { get; set; }
 
     public override void Configure()
     {
-        Get("/api/items/{id}");
+        Put("api/items/{id}");
         AllowAnonymous();
     }
 
@@ -19,11 +19,23 @@ public class GetItemByIdEndpoint : Endpoint<RequestDto, ResponseDto>
     {
         var item = await _context.Items.FirstOrDefaultAsync(x => x.Id == req.Id);
 
-        if (item == null)
+        if (item is null)
         {
             await SendNotFoundAsync(ct);
             return;
         }
+
+
+        item.Name = req.Name ?? item.Name;
+        item.Description = req.Description ?? item.Description;
+        item.Category = req.Category.Equals(item.Category) ? item.Category : req.Category;
+        item.Unit = req.Unit.Equals(item.Unit) ? item.Unit : req.Unit;
+        item.ImageUrl = req.ImageUrl ?? item.ImageUrl;
+        item.SKU = req.SKU ?? item.SKU;
+
+        var response = _context.Items.Update(item);
+
+        await _context.SaveChangesAsync();
 
         await SendAsync(new()
         {
@@ -33,9 +45,8 @@ public class GetItemByIdEndpoint : Endpoint<RequestDto, ResponseDto>
             Category = item.Category,
             Unit = item.Unit,
             ImageUrl = item.ImageUrl,
-            DefaultThreshold = item.DefaultThreshold,
             SKU = item.SKU,
+            DefaultThreshold = item.DefaultThreshold,
         });
-
     }
 }

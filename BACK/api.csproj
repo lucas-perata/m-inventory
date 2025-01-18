@@ -14,8 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Endpoints\Items\Delete\" />
-    <Folder Include="Endpoints\Items\Update\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

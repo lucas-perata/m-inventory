@@ -2,23 +2,17 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using BACK.Entities.Enums;
 
-namespace BACK.Endpoints.Items;
+namespace api.Endpoints.Items.Update;
 
 public class RequestDto
 {
     [Required]
+    public Guid Id { get; set; }
     [MaxLength(100)]
     public string Name { get; set; }
-
     public string Description { get; set; }
-
-    [Required]
     public ItemCategory Category { get; set; }
-
-    [Required]
     public MeasurementUnit Unit { get; set; }
-
     public string ImageUrl { get; set; }
-    public int DefaultThreshold { get; set; } = 1;
     public string SKU { get; set; }
 }

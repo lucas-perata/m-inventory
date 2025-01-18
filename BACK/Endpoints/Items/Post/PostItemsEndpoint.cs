@@ -3,6 +3,7 @@ using BACK.Data;
 using BACK.Entities;
 using FastEndpoints;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.OpenApi.Extensions;
 
 namespace BACK.Endpoints.Items.Post;
 
@@ -23,13 +24,9 @@ public class PostItemsEndpoint : Endpoint<RequestDto, ResponseDto>
             Name = req.Name,
             Description = req.Description,
             Category = req.Category,
-            Quantity = req.Quantity,
             Unit = req.Unit, 
-            Location = req.Location,
-            MinThreshold = req.MinThreshold,
-            LastUsed = req.LastUsed,
-            Barcode = req.Barcode,
-            ImageUrl = req.ImageUrl
+            ImageUrl = req.ImageUrl,
+            SKU = req.SKU
         };
 
         var response = _context.Items.Add(item); 
@@ -43,13 +40,10 @@ public class PostItemsEndpoint : Endpoint<RequestDto, ResponseDto>
             Name = req.Name,
             Description = req.Description,
             Category = req.Category,
-            Quantity = req.Quantity,
             Unit = req.Unit, 
-            Location = req.Location,
-            MinThreshold = req.MinThreshold,
-            LastUsed = req.LastUsed,
-            Barcode = req.Barcode,
-            ImageUrl = req.ImageUrl
+            ImageUrl = req.ImageUrl,
+            SKU = req.SKU,
+            DefaultThreshold = item.DefaultThreshold,
         });
     }
 }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace BACK.Migrations
+namespace api.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration
@@ -16,17 +16,13 @@ namespace BACK.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: true),
+                    Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true),
                     Category = table.Column<int>(type: "integer", nullable: false),
-                    Quantity = table.Column<int>(type: "integer", nullable: false),
                     Unit = table.Column<int>(type: "integer", nullable: false),
-                    Location = table.Column<string>(type: "text", nullable: true),
-                    MinThreshold = table.Column<int>(type: "integer", nullable: false),
-                    DateAcquired = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    LastUsed = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Barcode = table.Column<string>(type: "text", nullable: true),
-                    ImageUrl = table.Column<string>(type: "text", nullable: true)
+                    ImageUrl = table.Column<string>(type: "text", nullable: true),
+                    DefaultThreshold = table.Column<int>(type: "integer", nullable: false),
+                    SKU = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {

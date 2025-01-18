@@ -9,10 +9,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace BACK.Migrations
+namespace api.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250117201322_InitialCreate")]
+    [Migration("20250118002929_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -31,14 +31,11 @@ namespace BACK.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Barcode")
-                        .HasColumnType("text");
-
                     b.Property<int>("Category")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("DateAcquired")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<int>("DefaultThreshold")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
@@ -46,20 +43,13 @@ namespace BACK.Migrations
                     b.Property<string>("ImageUrl")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("LastUsed")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Location")
-                        .HasColumnType("text");
-
-                    b.Property<int>("MinThreshold")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Name")
-                        .HasColumnType("text");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
-                    b.Property<int>("Quantity")
-                        .HasColumnType("integer");
+                    b.Property<string>("SKU")
+                        .HasColumnType("text");
 
                     b.Property<int>("Unit")
                         .HasColumnType("integer");

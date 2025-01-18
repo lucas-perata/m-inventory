@@ -47,16 +47,14 @@ public class GetAllItemsEndpoint : Endpoint<RequestDto, ResponseDto>
                 Name = item.Name,
                 Description = item.Description,
                 Category = item.Category,
-                Quantity = item.Quantity,
                 Unit = item.Unit,
-                Location = item.Location,
-                MinThreshold = item.MinThreshold,
-                LastUsed = item.LastUsed,
-                Barcode = item.Barcode,
-                ImageUrl = item.ImageUrl
+                DefaultThreshold = item.DefaultThreshold,
+                ImageUrl = item.ImageUrl,
+                SKU = item.SKU,
             }).ToList()
         };
 
         await SendAsync(response, cancellation: ct);
     }
 }
+
