@@ -2,6 +2,7 @@ using System;
 using MainService.Data;
 using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace api.Endpoints.Items.Update;
 
@@ -9,10 +10,10 @@ public class UpdateItemEndpoint : Endpoint<RequestDto, ResponseDto>
 {
     public DataContext _context { get; set; }
 
+    [Authorize]
     public override void Configure()
     {
         Put("api/items/{id}");
-        AllowAnonymous();
     }
 
     public override async Task HandleAsync(RequestDto req, CancellationToken ct)

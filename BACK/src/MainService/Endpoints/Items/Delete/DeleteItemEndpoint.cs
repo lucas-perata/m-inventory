@@ -3,6 +3,7 @@ using MainService.Data;
 using MainService.Entities;
 using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MainService.Endpoints.Items.Delete;
 
@@ -10,10 +11,10 @@ public class DeleteItemEndpoint : Endpoint<RequestDto, ResponseDto>
 {
     public DataContext _context {get; set;}
 
+    [Authorize]
     public override void Configure()
     {
         Delete("api/items/{id}");
-        AllowAnonymous();
     }
 
     public override async Task HandleAsync(RequestDto req, CancellationToken ct)

@@ -4,6 +4,7 @@ using MainService.Entities;
 using FastEndpoints;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.OpenApi.Extensions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MainService.Endpoints.Items.Post;
 
@@ -11,10 +12,10 @@ public class PostItemsEndpoint : Endpoint<RequestDto, ResponseDto>
 {
     public DataContext _context {get;set;}
 
+    [Authorize]
     public override void Configure()
     {
         Post("/api/items");
-        AllowAnonymous();
     }
 
     public override async Task HandleAsync(RequestDto req, CancellationToken ct)

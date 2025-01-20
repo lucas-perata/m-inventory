@@ -69,3 +69,4 @@ project.fragment.lock.json
 artifacts/
 
 # ASP.NET 
+BACK/src/IdentityService/appsettings.Development.json
