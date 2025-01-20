@@ -3,20 +3,17 @@ using System;
 using MainService.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace MainService.Migrations
+namespace MainService.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250118235640_InitialCreate")]
-    partial class InitialCreate
+    partial class DataContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,6 +62,9 @@ namespace MainService.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
@@ -74,13 +74,19 @@ namespace MainService.Migrations
                     b.Property<bool>("IsPrivate")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("Maker")
+                        .HasColumnType("text");
+
+                    b.Property<string>("MakerId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
                     b.Property<string>("Notes")
                         .HasColumnType("text");
 
-                    b.Property<string>("ProjectName")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("StartDate")
+                    b.Property<DateTime?>("StartDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("Status")
@@ -112,7 +118,7 @@ namespace MainService.Migrations
 
                     b.HasIndex("ProjectId");
 
-                    b.ToTable("ProjectItem");
+                    b.ToTable("ProjectItems");
                 });
 
             modelBuilder.Entity("MainService.Entities.ProjectItem", b =>

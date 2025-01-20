@@ -13,6 +13,7 @@ public class DataContext : DbContext
 
     public DbSet<Item> Items { get; set; }
     public DbSet<Project> Projects { get; set; }
+    public DbSet<ProjectItem> ProjectItems { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -27,5 +28,11 @@ public class DataContext : DbContext
             .WithMany(i => i.ProjectItems)
             .HasForeignKey(pi => pi.ItemId)
             .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<Project>()
+            .HasMany(p => p.ProjectItems)
+            .WithOne(pi => pi.Project)
+            .HasForeignKey(pi => pi.ProjectId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

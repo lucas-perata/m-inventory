@@ -1,18 +1,15 @@
 using System;
-using System.ComponentModel.DataAnnotations.Schema;
+using MainService.Dtos;
+using MainService.Endpoints.Projects.GetAll;
+using MainService.Entities;
 using MainService.Entities.Enums;
 
-namespace MainService.Entities;
+namespace MainService.Endpoints.Projects.Post;
 
-[Table("Projects")]
-public class Project
+public class RequestDto
 {
-    public Guid Id { get; set; }               
-    public string MakerId { get; set; }
-    public string Maker {get; set;}
     public string Name { get; set; }            
     public string Description { get; set; }            
-    public DateTime CreatedAt {get; set;} = DateTime.UtcNow;
     public DateTime? StartDate { get; set; } = DateTime.UtcNow;
     public DateTime? EndDate { get; set; }             
     public ProjectStatus Status { get; set; }          

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace MainService.Migrations
+namespace MainService.Data.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration
@@ -34,9 +34,12 @@ namespace MainService.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    ProjectName = table.Column<string>(type: "text", nullable: true),
+                    MakerId = table.Column<string>(type: "text", nullable: true),
+                    Maker = table.Column<string>(type: "text", nullable: true),
+                    Name = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
-                    StartDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     EndDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     Status = table.Column<int>(type: "integer", nullable: false),
                     Notes = table.Column<string>(type: "text", nullable: true),
@@ -48,7 +51,7 @@ namespace MainService.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProjectItem",
+                name: "ProjectItems",
                 columns: table => new
                 {
                     ProjectItemId = table.Column<Guid>(type: "uuid", nullable: false),
@@ -58,15 +61,15 @@ namespace MainService.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProjectItem", x => x.ProjectItemId);
+                    table.PrimaryKey("PK_ProjectItems", x => x.ProjectItemId);
                     table.ForeignKey(
-                        name: "FK_ProjectItem_Items_ItemId",
+                        name: "FK_ProjectItems_Items_ItemId",
                         column: x => x.ItemId,
                         principalTable: "Items",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_ProjectItem_Projects_ProjectId",
+                        name: "FK_ProjectItems_Projects_ProjectId",
                         column: x => x.ProjectId,
                         principalTable: "Projects",
                         principalColumn: "Id",
@@ -74,13 +77,13 @@ namespace MainService.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProjectItem_ItemId",
-                table: "ProjectItem",
+                name: "IX_ProjectItems_ItemId",
+                table: "ProjectItems",
                 column: "ItemId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProjectItem_ProjectId",
-                table: "ProjectItem",
+                name: "IX_ProjectItems_ProjectId",
+                table: "ProjectItems",
                 column: "ProjectId");
         }
 
@@ -88,7 +91,7 @@ namespace MainService.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ProjectItem");
+                name: "ProjectItems");
 
             migrationBuilder.DropTable(
                 name: "Items");
