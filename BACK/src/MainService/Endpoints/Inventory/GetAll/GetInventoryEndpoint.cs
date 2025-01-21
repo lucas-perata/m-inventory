@@ -2,6 +2,7 @@ using System;
 using System.Security.Claims;
 using FastEndpoints;
 using MainService.Data;
+using MainService.Dtos.Item;
 using MainService.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +15,7 @@ public class GetInventoryEndpoint : Endpoint<RequestDto, ResponseDto>
     [Authorize]
     public override void Configure()
     {
-        Post("/api/inventory/get-all");
+        Get("/api/inventory/get-all");
     }
 
     public override async Task HandleAsync(RequestDto req, CancellationToken ct)
@@ -47,7 +48,7 @@ public class GetInventoryEndpoint : Endpoint<RequestDto, ResponseDto>
             Page = req.Page,
             PageSize = req.Page,
             TotalPages = totalItems > 0 ? totalItems / req.PageSize : 0,
-            Items = userItems.Select(userItem => new Item
+            Items = userItems.Select(userItem => new ItemInventoryDto
             {
                 Id = userItem.ItemId,
                 Name = userItem.Item.Name,
@@ -56,7 +57,8 @@ public class GetInventoryEndpoint : Endpoint<RequestDto, ResponseDto>
                 Unit = userItem.Item.Unit,
                 ImageUrl = userItem.Item.ImageUrl,
                 SKU = userItem.Item.SKU,
-                DefaultThreshold = userItem.Treshold
+                DefaultThreshold = userItem.Threshold,
+                Quantity = userItem.Quantity
             }).ToList()
         };
 

@@ -10,7 +10,7 @@ public class UserItem
     public Guid ItemId { get; set; }
     public Item Item { get; set; }
     public int Quantity { get; set; }
-    public int Treshold { get; set; } = 1; 
+    public int Threshold { get; set; } = 1; 
     public DateTime AddedAt { get; set; } = DateTime.UtcNow;
     public DateTime LastUpdated {get; set;} = DateTime.UtcNow;
 }

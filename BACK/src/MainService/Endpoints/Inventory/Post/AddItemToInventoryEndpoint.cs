@@ -35,7 +35,7 @@ public class AddItemToInventoryEndpoint : Endpoint<RequestDto, ResponseDto>
             UserId = userId,
             ItemId = item.Id,
             Quantity = req.Quantity,
-            Treshold = req.Treshold > item.DefaultThreshold ? req.Treshold : item.DefaultThreshold
+            Threshold = req.Treshold > item.DefaultThreshold ? req.Treshold : item.DefaultThreshold
         };
 
         _context.UserItems.Add(userItem);
@@ -49,7 +49,7 @@ public class AddItemToInventoryEndpoint : Endpoint<RequestDto, ResponseDto>
             ItemId = userItem.ItemId,
             ItemName = userItem.Item.Name,
             Quantity = userItem.Quantity,
-            Treshold = userItem.Treshold,
+            Treshold = userItem.Threshold,
             AddedAt = userItem.AddedAt
         });
     }

@@ -6,5 +6,5 @@ public class RequestDto
 {
     public Guid Id { get; set; }
     public int Quantity { get; set; }
-    public int Treshold { get; set; }
+    public int Threshold { get; set; }
 }

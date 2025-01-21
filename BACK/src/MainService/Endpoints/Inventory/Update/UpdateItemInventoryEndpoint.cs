@@ -22,29 +22,34 @@ public class UpdateItemInventoryEndpoint : Endpoint<RequestDto, ResponseDto>
     {
         string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        UserItem userItem = await _context.UserItems.Where(x => x.UserId == userId && x.Id == req.Id).FirstOrDefaultAsync();
+        UserItem userItem = await _context.UserItems.Where(x => x.UserId == userId && x.ItemId == req.Id).FirstOrDefaultAsync();
 
-        if(userItem is null)
+        if (userItem is null)
         {
             await SendNotFoundAsync(ct);
             return;
         }
 
         userItem.Quantity = userItem.Quantity != req.Quantity ? req.Quantity : userItem.Quantity;
-        userItem.Treshold = userItem.Treshold != req.Treshold ? req.Treshold : userItem.Treshold;
+
+        if (req.Threshold == 0)
+            userItem.Threshold = userItem.Threshold;
+        else
+            userItem.Threshold = req.Threshold;
+
         userItem.LastUpdated = DateTime.UtcNow;
 
         _context.Update(userItem);
         await _context.SaveChangesAsync();
 
-        userItem = await _context.UserItems.Include(x => x.Item).Where(x => x.Id == req.Id).FirstOrDefaultAsync();
+        userItem = await _context.UserItems.Include(x => x.Item).Where(x => x.ItemId == req.Id).FirstOrDefaultAsync();
 
         await SendAsync(new()
         {
             ItemId = userItem.ItemId,
-            ItemName = userItem.Item.Name, 
-            Quantity = userItem.Quantity, 
-            Treshold = userItem.Treshold,
+            ItemName = userItem.Item.Name,
+            Quantity = userItem.Quantity,
+            Threshold = userItem.Threshold,
             LastUpdated = userItem.LastUpdated,
             AddedAt = userItem.AddedAt
         });

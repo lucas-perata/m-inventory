@@ -23,12 +23,12 @@ public class DeleteItemInventoryEndpoint : Endpoint<RequestDto, ResponseDto>
         string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
         UserItem userItem = await _context.UserItems
-                .Where(x => x.UserId == userId && x.Id == req.Id)
+                .Where(x => x.UserId == userId && x.ItemId == req.Id)
                 .FirstOrDefaultAsync();
         
         if (userItem is null)
         {
-            await SendUnauthorizedAsync(ct);
+            await SendNotFoundAsync(ct);
             return;
         }
 
