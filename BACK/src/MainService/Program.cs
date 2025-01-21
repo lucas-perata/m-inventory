@@ -2,6 +2,7 @@ using MainService.Data;
 using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using MainService.Services.UserItem;
 
 var bld = WebApplication.CreateBuilder();
 
@@ -10,6 +11,8 @@ bld.Services.AddDbContext<DataContext>(opt =>
 {
     opt.UseNpgsql(bld.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+bld.Services.AddScoped<IUserItemService, UserItemService>();
 
 bld.Services.AddFastEndpoints();
 

@@ -1,5 +1,6 @@
 using System;
 using MainService.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace MainService.Data;
@@ -14,6 +15,7 @@ public class DataContext : DbContext
     public DbSet<Item> Items { get; set; }
     public DbSet<Project> Projects { get; set; }
     public DbSet<ProjectItem> ProjectItems { get; set; }
+    public DbSet<UserItem> UserItems { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

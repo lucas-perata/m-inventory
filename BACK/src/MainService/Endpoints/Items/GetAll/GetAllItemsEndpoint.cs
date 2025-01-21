@@ -49,7 +49,6 @@ public class GetAllItemsEndpoint : Endpoint<RequestDto, ResponseDto>
                 Description = item.Description,
                 Category = item.Category,
                 Unit = item.Unit,
-                DefaultThreshold = item.DefaultThreshold,
                 ImageUrl = item.ImageUrl,
                 SKU = item.SKU,
             }).ToList()

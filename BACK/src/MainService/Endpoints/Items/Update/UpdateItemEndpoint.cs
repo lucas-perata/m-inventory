@@ -34,7 +34,7 @@ public class UpdateItemEndpoint : Endpoint<RequestDto, ResponseDto>
         item.ImageUrl = req.ImageUrl ?? item.ImageUrl;
         item.SKU = req.SKU ?? item.SKU;
 
-        var response = _context.Items.Update(item);
+         _context.Items.Update(item);
 
         await _context.SaveChangesAsync();
 
