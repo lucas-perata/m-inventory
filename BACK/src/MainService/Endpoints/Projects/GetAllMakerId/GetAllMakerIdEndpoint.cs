@@ -3,18 +3,19 @@ using System.Security.Claims;
 using FastEndpoints;
 using MainService.Data;
 using MainService.Dtos;
+using MainService.Endpoints.Projects.GetAll;
 using MainService.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace MainService.Endpoints.Projects.GetAll;
+namespace MainService.Endpoints.Projects.GetAllMakerId;
 
-public class GetAllProjectsEndpoint : Endpoint<RequestDto, ResponseDto>
+public class GetAllMakerIdEndpoint : Endpoint<RequestDto, ResponseDto>
 {
     public DataContext _context { get; set; }
 
     public override void Configure()
     {
-        Get("/api/projects/all");
+        Get("/api/projects/maker/all");
         AllowAnonymous();
     }
 
@@ -24,10 +25,9 @@ public class GetAllProjectsEndpoint : Endpoint<RequestDto, ResponseDto>
 
         int skip = (req.Page - 1) * req.PageSize;
 
-        var p = await _context.Projects.ToListAsync();
+        var p = await _context.Projects.Where(x => x.MakerId == userId).ToListAsync();
 
         int totalItems = p.Count();
-
 
         List<Project> projects = await _context.Projects.Include(x => x.ProjectItems)
         .ThenInclude(x => x.Item)
@@ -53,6 +53,7 @@ public class GetAllProjectsEndpoint : Endpoint<RequestDto, ResponseDto>
             {
                 Id = project.Id,
                 Name = project.Name,
+                MakerId = project.MakerId,
                 Description = project.Description,
                 StartDate = project.StartDate,
                 EndDate = project.EndDate,

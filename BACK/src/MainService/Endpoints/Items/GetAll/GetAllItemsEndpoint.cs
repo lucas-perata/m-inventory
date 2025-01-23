@@ -12,7 +12,7 @@ public class GetAllItemsEndpoint : Endpoint<RequestDto, ResponseDto>
     public DataContext _context {get; set;}
     public override void Configure()
     {
-        Get("/api/items");
+        Get("/api/items/get-all");
         AllowAnonymous();
     }
 

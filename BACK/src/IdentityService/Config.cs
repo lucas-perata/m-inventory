@@ -56,6 +56,20 @@ public static class Config
                 // DEV ENVIRONMENT
                 ClientSecrets = {new Secret("NotASecret".Sha256())},
                 AllowedGrantTypes = {GrantType.ResourceOwnerPassword}
+            },
+
+            // SETTINGS ONLY FOR DEV ENV
+            new Client
+            {
+                ClientId = "nextApp",
+                ClientName = "nextApp",
+                ClientSecrets = {new Secret("secrets".Sha256())},
+                AllowedGrantTypes = GrantTypes.CodeAndClientCredentials,
+                RequirePkce = false, 
+                RedirectUris = {"http://localhost:3000/api/auth/callback/id-server"}, 
+                AllowOfflineAccess = true,
+                AllowedScopes = {"openid", "profile", "inventoryApp"},
+                AccessTokenLifetime = 3600*24*30
             }
         };
 }

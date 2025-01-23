@@ -45,6 +45,7 @@ public class GetProjectById : Endpoint<RequestDto, ResponseDto>
         {
         ResponseProject = new ProjectDto
           {
+            Id = project.Id,
             Name = project.Name,
             MakerId = project.MakerId,
             Maker = project.Maker,

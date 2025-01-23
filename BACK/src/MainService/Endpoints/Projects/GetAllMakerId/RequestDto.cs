@@ -1,6 +1,6 @@
 using System;
 
-namespace MainService.Endpoints.Items.GetAll;
+namespace MainService.Endpoints.Projects.GetAllMakerId;
 
 public class RequestDto
 {
