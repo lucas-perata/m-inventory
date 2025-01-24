@@ -1,5 +1,6 @@
 using System;
 using MainService.Entities;
+using MassTransit;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,6 +20,12 @@ public class DataContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.AddInboxStateEntity();
+        modelBuilder.AddOutboxMessageEntity();
+        modelBuilder.AddOutboxStateEntity();
+
+
         modelBuilder.Entity<ProjectItem>()
             .HasOne(pi => pi.Project)
             .WithMany(p => p.ProjectItems)
